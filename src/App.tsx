@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+import Layout from './components/Content/Layout'
+import Dashboard from './components/Content/Dashboard'
+import Statistics from './components/Content/Statistics'
+import History from './components/Content/History'
+import Body from './components/Content/Body'
+import More from './components/Content/More'
+import Exercises from './components/Content/ExercisesList'
+import Training from './components/Content/Training'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path='/workit' element={<Dashboard />} />
+          <Route path='/workit/exercises' element={<Exercises />} />
+          <Route path='/workit/more' element={<More />} />
+          <Route path='/workit/body' element={<Body />} />
+          <Route path='/workit/history' element={<History />} />
+          <Route path='/workit/statistics' element={<Statistics />} />
+          <Route path='/workit/training' element={<Training />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
