@@ -8,11 +8,22 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
 
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from '../../../redux/reducer'
+import { closeCalendar } from '../../../data/actions/calendar'
+
+
 export default function Calendar() {
   const [value, setValue] = useState<Date | null>(new Date());
+  const dispatch = useDispatch()
+
+  const { open } = useSelector((state: RootState) => state.calendar)
 
   return (
-    <Dialog open={false} >
+    <Dialog
+      open={open}
+      onBackdropClick={() => dispatch(closeCalendar())}
+    >
       <DialogTitle style={{textAlign: 'center'}}>Calendar</DialogTitle>
 
        <LocalizationProvider dateAdapter={AdapterDateFns}>

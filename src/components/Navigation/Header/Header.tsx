@@ -12,7 +12,12 @@ import TodayIcon from '@mui/icons-material/Today';
 import LanguageSelection from '../../UI/LanguageSelection'
 import Calendar from '../../Content/Calendar'
 
+import { useDispatch } from "react-redux"
+import { openCalendar } from '../../../data/actions/calendar'
+
 export default function Header() {
+  const dispatch = useDispatch()
+
   return (
     <Grid container>
       <AppBar position="static" style={{padding: '10px 0'}}>
@@ -50,7 +55,7 @@ export default function Header() {
             alignItems='center'
           >
             <LanguageSelection />
-            <IconButton >
+            <IconButton onClick={() => dispatch(openCalendar())}>
               <TodayIcon />
             </IconButton>
           </Grid>
