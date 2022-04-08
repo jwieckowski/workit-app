@@ -13,6 +13,3 @@ export type CloseCalendar = {
     type: typeof actions.CALENDAR_CLOSE
 }
 
-
-export type CalendarActions = OpenCalendar | CloseCalendar
-

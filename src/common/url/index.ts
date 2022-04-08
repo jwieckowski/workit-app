@@ -1,0 +1,1 @@
+export const serverURL = 'https://workit-server.herokuapp.com/api'

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import react, { useEffect } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,40 +9,56 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-const data = [
-  {
-    date: '01.03.2022',
-    weight: 85.1
-  },
-  {
-    date: '02.03.2022',
-    weight: 84.4
-  },
-  {
-    date: '03.03.2022',
-    weight: 83.1
-  },
-  {
-    date: '04.03.2022',
-    weight: 87.1
-  },
-  {
-    date: '04.03.2022',
-    weight: 87.1
-  },
-  {
-    date: '04.03.2022',
-    weight: 87.1
-  },
-  {
-    date: '04.03.2022',
-    weight: 87.1
-  },
-]
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBody } from '../../../../data/actions/body'
+import { RootState } from '../../../../redux/reducer'
+
+import Spinner from '../../../UI/Spinner'
+import Page404 from '../../../UI/Page404'
+
+// TODO sort by data
 
 export default function BodyTable() {
+  const dispatch = useDispatch()
+  const {loading, data, error} = useSelector((state: RootState) => state.body)
+
+  useEffect(() => {
+    dispatch(fetchBody())
+  }, [])
+
+  let content = <Spinner />
+  if (!loading) {
+    if (!error) {
+      content = (
+        <>
+          {
+            data.map((row, idx) => (
+              <TableRow
+                key={idx}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <Typography variant='body2'>
+                    {row.date}
+                  </Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant='body2'>
+                    {row.weight}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ))
+          }
+        </>
+      )
+    } else {
+      content = <Page404 />
+    }
+  }
+
   return (
-    <TableContainer component={Paper} elevation={4} style={{width: '80%', padding: '0 10%', maxHeight: '50%'}}>
+    <TableContainer component={Paper} elevation={4} style={{width: '80%', padding: '0 10%', maxHeight: '50%', minHeight: '50%'}}>
       <Table
         size="medium"
         aria-label="Body weight table"
@@ -64,23 +80,7 @@ export default function BodyTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row, idx) => (
-            <TableRow
-              key={idx}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                <Typography variant='body2'>
-                  {row.date}
-                </Typography>
-              </TableCell>
-              <TableCell align="right">
-                <Typography variant='body2'>
-                  {row.weight}
-                </Typography>
-              </TableCell>
-            </TableRow>
-          ))}
+          {content}
         </TableBody>
       </Table>
     </TableContainer>

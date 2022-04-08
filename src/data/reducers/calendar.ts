@@ -1,11 +1,12 @@
 import actions from '../../common/actionTypes/calendar'
-import { CalendarActions, CalendarState } from '../../common/types/calendar'
+import { AnyAction, Reducer } from 'redux'
+import { CalendarState } from '../../common/types/calendar'
 
 const initialState: CalendarState = {
     open: false
 }
 
-export default function calendar (state = initialState, action: CalendarActions) {
+const calendar: Reducer<CalendarState> = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case actions.CALENDAR_OPEN:
             return {
@@ -23,3 +24,5 @@ export default function calendar (state = initialState, action: CalendarActions)
             }
     }
 }
+
+export default calendar

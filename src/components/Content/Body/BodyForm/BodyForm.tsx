@@ -1,10 +1,49 @@
-import * as React from 'react';
+import react, { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { postBody } from '../../../../data/actions/body'
+import { RootState } from '../../../../redux/reducer'
+
+const getCurrentDate = () => {
+  return new Date().toISOString().slice(0, 10)
+}
+
 export default function BodyForm() {
+  const dispatch = useDispatch()
+  const { data } = useSelector((state: RootState) => state.body)
+  const [currentDate, setCurrentDate] = useState<string>('')
+  const [weight, setWeight] = useState<string>('0')
+
+  useEffect(() => {
+    setCurrentDate(getCurrentDate())
+  }, [])
+
+
+  const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    const id = data.filter(d => d.date === currentDate).length !== 0
+      ? data.filter(d => d.date === currentDate)[0]._id
+      : data.length+1
+
+    const newItem = {
+      _id: id,
+      weight: +weight,
+      date: currentDate
+    }
+    dispatch(postBody({item: newItem}))
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    e.target.id === 'date'
+      ? setCurrentDate(e.target.value)
+      : setWeight(e.target.value)
+  }
+
   return (
     <Grid
       container
@@ -16,9 +55,26 @@ export default function BodyForm() {
         marginTop: '100px'
       }}
     >
-      <TextField id="date" label="Date" variant="outlined" />
-      <TextField id="weight" label="Weight" variant="outlined" />
-      <Button variant="contained">Submit</Button>
+      <TextField
+        id="date"
+        label="Date"
+        variant="outlined"
+        value={currentDate}
+        onChange={handleChange}
+        />
+      <TextField
+        id="weight"
+        label="Weight"
+        variant="outlined"
+        value={weight}
+        onChange={handleChange}
+      />
+      <Button
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Submit
+      </Button>
     </Grid>
   );
 }

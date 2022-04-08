@@ -7,7 +7,6 @@ interface LayoutChildren {
     children: ReactChildren | ReactChild
 }
 
-
 export default function Layout({children}: LayoutChildren) {
   return (
     <Grid container >
