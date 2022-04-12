@@ -8,9 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postBody } from '../../../../data/actions/body'
 import { RootState } from '../../../../redux/reducer'
 
-const getCurrentDate = () => {
-  return new Date().toISOString().slice(0, 10)
-}
+import { getCurrentDate } from '../../helpers'
 
 export default function BodyForm() {
   const dispatch = useDispatch()
@@ -21,6 +19,10 @@ export default function BodyForm() {
   useEffect(() => {
     setCurrentDate(getCurrentDate())
   }, [])
+
+  useEffect(() => {
+    setWeight(data.length !== 0 ? data[0]?.weight.toString() : '0')
+  }, [data])
 
 
   const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {

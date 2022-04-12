@@ -3,21 +3,36 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
+import Button from '@mui/material/Button';
 
-import ExercisesItem from './ExercisesItem';
-
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reducer'
-import { fetchExercises } from '../../../data/actions/exercises'
+import { fetchExercises, closeRoutineExercises } from '../../../data/actions/exercises'
 import { fetchFavorites } from '../../../data/actions/favorites'
+import { postRoutineExercises } from '../../../data/actions/routines'
 
+import ExercisesItem from './ExercisesItem';
 import Spinner from '../../UI/Spinner'
 import Page404 from '../../UI/Page404'
 
 export default function ExercisesList() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { loading, data, error } = useSelector((state: RootState) => state.exercises)
+  const { loading, data, error, openForRoutine } = useSelector((state: RootState) => state.exercises)
+  const { item } = useSelector((state: RootState) => state.routines)
   const favorites = useSelector((state: RootState) => state.favorites)
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (item === null) return
+
+    dispatch(closeRoutineExercises())
+    dispatch(postRoutineExercises({
+      item: item
+    }))
+    navigate('/workit', { replace: true })
+  }
 
   useEffect(() => {
     dispatch(fetchExercises())
@@ -34,7 +49,7 @@ export default function ExercisesList() {
               width: '80%',
               position: 'relative',
               overflow: 'auto',
-              maxHeight: '80%',
+              maxHeight: '75%',
               '& ul': { padding: 0 },
             }}
             subheader={<li />}
@@ -60,19 +75,42 @@ export default function ExercisesList() {
       direction='column'
       justifyContent='start'
       alignItems='center'
-      style={{ maxHeight: '80%'}}
+      style={{ maxHeight: '95%'}}
     >
       <Grid
         container
+        flexDirection='column'
         justifyContent='center'
         alignItems='center'
-        style= {{ padding: '20px'}}
-      >
-        <Typography variant='h4'>
-          Exercises list
-        </Typography>
+        style= {{ padding: '10px'}}
+        >
+        <Grid
+          container
+          flexDirection='column'
+          justifyContent='center'
+          alignItems='center'
+          style= {{ padding: '5px'}}
+        >
+          <Typography variant='h4'>
+            Exercises list
+          </Typography>
+          {
+            openForRoutine &&
+            <Typography variant='h6' style={{ padding: '10px' }}>
+            {item?.name}
+          </Typography>
+          }
+        </Grid>
       </Grid>
       {content}
+      {
+        openForRoutine &&
+        <Grid style={{ paddingTop: '10px' }}>
+          <Button variant='contained' onClick={handleClick}>
+            SUBMIT
+          </Button>
+        </Grid>
+      }
     </Grid>
   );
 }

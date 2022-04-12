@@ -14,6 +14,7 @@ export interface ExercisesState {
     loading: boolean,
     data: ExercisesList,
     error: string | null,
+    openForRoutine: boolean
 }
 
 export interface FetchExercisesSuccessData {
@@ -37,4 +38,14 @@ export interface FetchExercisesFail {
     type: typeof actions.FETCH_EXERCISES_FAIL,
     payload: FetchExercisesFailData
 }
+
+export interface OpenRoutineExercises {
+    type: typeof actions.OPEN_ROUTINE_EXERCISES
+}
+
+
+export interface CloseRoutineExercises {
+    type: typeof actions.CLOSE_ROUTINE_EXERCISES
+}
+
 

@@ -57,13 +57,13 @@ const favorites: Reducer<FavoritesState> = (state = initialState, action: AnyAct
         case actions.DELETE_FAVORITE:
             return {
                 ...state,
-                posting: true,
+                deleting: true,
                 item: action.payload.item
             };
         case actions.DELETE_FAVORITE_SUCCESS:
             return {
                 ...state,
-                posting: false,
+                deleting: false,
                 data: state?.item ? [...state.data.filter(d => d._id !== state.item?._id)] : state.data,
                 item: null,
                 error: null
@@ -71,7 +71,7 @@ const favorites: Reducer<FavoritesState> = (state = initialState, action: AnyAct
         case actions.DELETE_FAVORITE_FAIL:
             return {
                 ...state,
-                posting: false,
+                deleting: false,
                 item: null,
                 data: state.data,
                 error: action.payload.error

@@ -5,12 +5,16 @@ import calendar from '../../data/reducers/calendar'
 import exercises from '../../data/reducers/exercises'
 import body from '../../data/reducers/body'
 import favorites from '../../data/reducers/favorites'
+import routines from '../../data/reducers/routines'
+import training from '../../data/reducers/training'
 
 const rootReducer = combineReducers({
   calendar: calendar,
   exercises: exercises,
   body: body,
-  favorites: favorites
+  favorites: favorites,
+  routines: routines,
+  training: training
 })
 
 export type RootState = ReturnType<typeof rootReducer>;

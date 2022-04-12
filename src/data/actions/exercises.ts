@@ -4,7 +4,9 @@ import {
     FetchExercisesFailData,
     FetchExercises,
     FetchExercisesSuccess,
-    FetchExercisesFail
+    FetchExercisesFail,
+    OpenRoutineExercises,
+    CloseRoutineExercises
 } from '../../common/types/exercises'
 
 export const fetchExercises = (): FetchExercises => ({
@@ -25,4 +27,12 @@ export const fetchExercisesFail = (
 ): FetchExercisesFail => ({
     type: actions.FETCH_EXERCISES_FAIL,
     payload
+})
+
+export const openRoutineExercises = (): OpenRoutineExercises => ({
+    type: actions.OPEN_ROUTINE_EXERCISES
+})
+
+export const closeRoutineExercises = (): CloseRoutineExercises => ({
+    type: actions.CLOSE_ROUTINE_EXERCISES
 })

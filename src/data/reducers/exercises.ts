@@ -5,7 +5,8 @@ import { ExercisesState } from '../../common/types/exercises'
 const initialState: ExercisesState = {
     loading: false,
     data: {'key': []},
-    error: null
+    error: null,
+    openForRoutine: false
 }
 
 const exercises: Reducer<ExercisesState> = (state = initialState, action: AnyAction) => {
@@ -28,6 +29,16 @@ const exercises: Reducer<ExercisesState> = (state = initialState, action: AnyAct
                 loading: false,
                 data: {'key': []},
                 error: action.payload.error
+            }
+        case actions.OPEN_ROUTINE_EXERCISES:
+            return {
+                ...state,
+                openForRoutine: true
+            }
+        case actions.CLOSE_ROUTINE_EXERCISES:
+            return {
+                ...state,
+                openForRoutine: false
             }
         default:
             return {

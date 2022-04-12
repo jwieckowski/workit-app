@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postFavorite, deleteFavorite } from '../../../../data/actions/favorites'
+import { addRoutineExercise, deleteRoutineExercise } from '../../../../data/actions/routines'
+import { RootState } from '../../../../redux/reducer'
 
 
 import Typography from '@mui/material/Typography';
@@ -11,6 +13,8 @@ import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 interface ExercisesProps {
   _id: number
@@ -31,8 +35,9 @@ interface ExercisesItemProps {
 
 export default function ExercisesItem({idx, part, exercises, favorites}: ExercisesItemProps) {
   const dispatch = useDispatch()
+  const { item } = useSelector((state: RootState) => state.routines)
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>, exerciseID: number) => {
+  const handleFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>, exerciseID: number) => {
     e.preventDefault()
     favorites.filter(d => d._id === exerciseID).length === 0
       ? dispatch(postFavorite({
@@ -45,6 +50,13 @@ export default function ExercisesItem({idx, part, exercises, favorites}: Exercis
           _id: exerciseID
         }
       }))
+  }
+
+  const handleExerciseClick = (e: React.MouseEvent<HTMLButtonElement>, exerciseID: number) => {
+    e.preventDefault()
+    item?.exercises.filter(d => d._id === exerciseID).length === 0
+      ? dispatch(addRoutineExercise({ _id: exerciseID }))
+      : dispatch(deleteRoutineExercise({ _id: exerciseID }))
   }
 
   return (
@@ -63,7 +75,16 @@ export default function ExercisesItem({idx, part, exercises, favorites}: Exercis
               </Typography>
               }
             />
-            <IconButton onClick={(e) => handleClick(e, exercise._id)}>
+            { item !== null &&
+              <IconButton onClick={(e) => handleExerciseClick(e, exercise._id)}>
+                {
+                  item?.exercises.filter(d => d._id === exercise._id).length === 0
+                    ? <CheckBoxOutlineBlankIcon/>
+                    : <CheckBoxIcon/>
+                }
+              </IconButton>
+            }
+            <IconButton onClick={(e) => handleFavoriteClick(e, exercise._id)}>
               {
                 favorites.filter(d => d._id === exercise._id).length === 0
                   ? <StarBorderIcon/>

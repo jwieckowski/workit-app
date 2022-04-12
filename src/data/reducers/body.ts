@@ -1,6 +1,6 @@
 import actions from '../../common/actionTypes/body'
 import { AnyAction, Reducer } from 'redux'
-import { BodyState } from '../../common/types/body'
+import { BodyState, BodyItem } from '../../common/types/body'
 
 const initialState: BodyState = {
     posting: false,
@@ -9,6 +9,10 @@ const initialState: BodyState = {
     data: [],
     error: null
 }
+
+const sortBodyData = (data: BodyItem[] | []) => {
+  return data.sort((a: BodyItem, b: BodyItem) => new Date(b.date).getTime() - new Date(a.date).getTime());
+};
 
 const body: Reducer<BodyState> = (state = initialState, action: AnyAction) => {
     switch (action.type) {
@@ -48,7 +52,7 @@ const body: Reducer<BodyState> = (state = initialState, action: AnyAction) => {
                             return state.item !== null && d._id === state.item._id
                                 ? state.item : d
                         })]
-                        : [state.item, ...state.data]
+                        : sortBodyData([state.item, ...state.data])
                     : state.data,
                 item: null,
                 error: null

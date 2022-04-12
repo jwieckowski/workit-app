@@ -17,16 +17,13 @@ import { serverURL } from '../../common/url'
 import { ResponseGenerator } from '../../common/types/response'
 
 const getFavorites = () =>
-  // axios.get<FavoriteItem[] | []>(`${serverURL}/favorite`);
-  axios.get<FavoriteItem[] | []>(`http://localhost:5000/api/favorite`);
+  axios.get<FavoriteItem[] | []>(`${serverURL}/favorite`);
 
 const postFavorite = (item: FavoriteItem) =>
-  // axios.post<FavoriteItem[] | []>(`${serverURL}/favorite/${item._id}`, item);
-  axios.post<FavoriteItem[] | []>(`http://localhost:5000/api/favorite/${item._id}`);
+  axios.post<FavoriteItem[] | []>(`${serverURL}/favorite/${item._id}`, item);
 
 const deleteFavorite = (item: FavoriteItem) =>
-  // axios.delete<FavoriteItem[] | []>(`${serverURL}/favorite/${item._id}`);
-  axios.delete<FavoriteItem[] | []>(`http://localhost:5000/api/favorite/${item._id}`);
+  axios.delete<FavoriteItem[] | []>(`${serverURL}/favorite/${item._id}`);
 
 function* fetchFavoritesSaga() {
   try {
