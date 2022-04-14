@@ -18,7 +18,8 @@ export interface RoutinesState {
     item: RoutineItem | null,
     data: RoutineItem[] | [],
     error: string | null,
-    open: boolean
+    open: boolean,
+    startTrainingOpen: boolean,
 }
 
 export interface FetchRoutinesSuccessData {
@@ -134,4 +135,12 @@ export interface OpenRoutineDialog {
 
 export interface CloseRoutineDialog {
     type: typeof actions.CLOSE_ROUTINE_DIALOG,
+}
+
+export interface OpenTrainingDialog {
+    type: typeof actions.OPEN_TRAINING_DIALOG,
+}
+
+export interface CloseTrainingDialog {
+    type: typeof actions.CLOSE_TRAINING_DIALOG,
 }

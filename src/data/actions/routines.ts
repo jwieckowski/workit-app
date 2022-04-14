@@ -25,6 +25,8 @@ import {
     PostRoutineExercisesFail,
     OpenRoutineDialog,
     CloseRoutineDialog,
+    OpenTrainingDialog,
+    CloseTrainingDialog,
 } from '../../common/types/routines'
 
 export const fetchRoutines = (): FetchRoutines => ({
@@ -149,4 +151,12 @@ export const openRoutineDialog = (
 
 export const closeRoutineDialog = (): CloseRoutineDialog => ({
     type: actions.CLOSE_ROUTINE_DIALOG
+})
+
+export const openTrainingDialog = (): OpenTrainingDialog => ({
+    type: actions.OPEN_TRAINING_DIALOG,
+})
+
+export const closeTrainingDialog = (): CloseTrainingDialog => ({
+    type: actions.CLOSE_TRAINING_DIALOG
 })

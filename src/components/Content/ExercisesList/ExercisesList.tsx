@@ -34,10 +34,10 @@ export default function ExercisesList() {
     navigate('/workit', { replace: true })
   }
 
-  useEffect(() => {
-    dispatch(fetchExercises())
-    dispatch(fetchFavorites())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(fetchExercises())
+  //   dispatch(fetchFavorites())
+  // }, [])
 
   let content = <Spinner />
 

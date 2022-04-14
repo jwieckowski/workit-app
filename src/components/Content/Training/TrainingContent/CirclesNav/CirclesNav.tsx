@@ -1,24 +1,22 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import CircleIcon from '@mui/icons-material/Circle';
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../../redux/reducer'
+import { setActiveExercises } from '../../../../../data/actions/training'
 
-interface PropsTypes {
-  activeExercise: number;
-  setActiveExercise: Dispatch<SetStateAction<number>>;
-}
-
-export default function CirclesNav({ activeExercise, setActiveExercise }: PropsTypes) {
+export default function CirclesNav() {
+  const dispatch = useDispatch()
   const { item }  = useSelector((state: RootState) => state.routines)
+  const { exerciseID } = useSelector((state: RootState) => state.training)
 
   const handleClickCircle = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.preventDefault()
     if (item === null || item.exercises.length === 0) return
-    setActiveExercise(id)
+    dispatch(setActiveExercises({ exerciseID: id }))
   }
 
   return (
@@ -31,12 +29,12 @@ export default function CirclesNav({ activeExercise, setActiveExercise }: PropsT
       }}
     >
       {
-        item?.exercises.map((e, idx) => {
+        item?.exercises.map((i, idx) => {
           return (
             <IconButton
               key={idx}
-              onClick={(e) => handleClickCircle(e, idx)}
-              style={{ color: activeExercise === idx ? 'blue' : 'black' }}
+              onClick={(e) => handleClickCircle(e, i._id)}
+              style={{ color: exerciseID === i._id ? 'blue' : 'black' }}
             >
               <CircleIcon />
             </IconButton>

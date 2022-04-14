@@ -13,6 +13,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import RoutineItem from './RoutineItem'
 import RoutineDialog from './RoutineDialog'
+import ExerciseStartDialog  from './ExerciseStartDialog';
 
 import Spinner from '../../../UI/Spinner'
 import Page404 from '../../../UI/Page404'
@@ -59,11 +60,13 @@ export default function RoutineList() {
                       key={idx}
                       _id={routine._id}
                       name={routine.name}
+                      exercises={routine.exercises}
                     />
                   )
                 })
               }
               <RoutineDialog />
+              <ExerciseStartDialog />
             </List>
           }
         </>

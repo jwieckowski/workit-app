@@ -7,6 +7,9 @@ import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../redux/reducer'
 import { setActiveRoutine } from '../../../data/actions/routines'
+import { fetchTrainings } from '../../../data/actions/training'
+import { fetchExercises } from '../../../data/actions/exercises'
+import { fetchFavorites } from '../../../data/actions/favorites'
 
 interface LayoutChildren {
     children: ReactChildren | ReactChild
@@ -17,6 +20,14 @@ export default function Layout({children}: LayoutChildren) {
   const dispatch = useDispatch()
   const [currentPath, setCurrentPath] = useState<string>('')
   const state = useSelector((state: RootState) => state)
+
+  console.log(state.training)
+
+  useEffect(() => {
+    dispatch(fetchTrainings())
+    dispatch(fetchExercises())
+    dispatch(fetchFavorites())
+  }, [])
 
   // TODO do individual hook for this
   useEffect(() => {

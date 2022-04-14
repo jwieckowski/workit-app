@@ -10,22 +10,39 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { deleteRoutine, openRoutineDialog, setActiveRoutine } from '../../../../../data/actions/routines'
+import { deleteRoutine, openRoutineDialog, openTrainingDialog, setActiveRoutine } from '../../../../../data/actions/routines'
 import { openRoutineExercises } from '../../../../../data/actions/exercises'
 import { startTraining } from '../../../../../data/actions/training'
+import { ExerciseItem } from '../../../../../common/types/routines'
+
+import { getCurrentDate } from '../../../helpers'
+
 interface ItemProps {
   _id: number
-  name: string
+  name: string,
+  exercises: ExerciseItem[] | []
 }
 
-export default function RoutineItem({_id, name}: ItemProps) {
+export default function RoutineItem({_id, name, exercises}: ItemProps) {
   const dispatch = useDispatch()
   let navigate = useNavigate();
 
   const handleStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+    if (exercises.length === 0) {
+      dispatch(openTrainingDialog())
+      return
+    }
+
     dispatch(setActiveRoutine({ _id }))
-    dispatch(startTraining())
+    dispatch(startTraining({
+      item: {
+        date: getCurrentDate(),
+        trainingSeries: [],
+        routineID: _id
+      },
+      exerciseID: exercises[0]._id
+    }))
     navigate('/workit/training')
   }
 

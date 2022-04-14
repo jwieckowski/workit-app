@@ -1,31 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
 
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../../redux/reducer'
+import { addTrainingSeries } from '../../../../data/actions/training'
+
+
 export default function TrainingForm() {
+  const dispatch = useDispatch()
+  const [reps, setReps] = useState<string>('')
+  const [weights, setWeights] = useState<string>('')
+
+  const { exerciseID } = useSelector((state: RootState) => state.training)
 
   const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    // const id = data.filter(d => d.date === currentDate).length !== 0
-    //   ? data.filter(d => d.date === currentDate)[0]._id
-    //   : data.length+1
+    if (exerciseID === null) return
 
-    // const newItem = {
-    //   _id: id,
-    //   weight: +weight,
-    //   date: currentDate
-    // }
-    // dispatch(postBody({item: newItem}))
+    dispatch(addTrainingSeries({
+      exerciseID: exerciseID,
+      weights: parseFloat(weights),
+      reps: parseFloat(reps)
+    }))
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    // e.target.id === 'date'
-    //   ? setCurrentDate(e.target.value)
-    //   : setWeight(e.target.value)
+    e.target.id === 'reps'
+      ? setReps(e.target.value)
+      : setWeights(e.target.value)
   }
 
   return (
@@ -42,14 +49,14 @@ export default function TrainingForm() {
         id="reps"
         label="Reps"
         variant="outlined"
-        // value={weight}
+        value={reps}
         onChange={handleChange}
       />
       <TextField
         id="weight"
         label="Weight"
         variant="outlined"
-        // value={weight}
+        value={weights}
         onChange={handleChange}
       />
       <IconButton

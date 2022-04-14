@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -12,7 +12,6 @@ import CirclesNav from './CirclesNav'
 
 export default function TrainingContent() {
   const dispatch = useDispatch()
-  const [activeExercise, setActiveExercise] = useState<number>(0)
 
   useEffect(() => {
     dispatch(fetchExercises())
@@ -30,15 +29,9 @@ export default function TrainingContent() {
         height: "65%"
       }}
     >
-      <TrainingNav
-        activeExercise={activeExercise}
-        setActiveExercise={setActiveExercise}
-      />
+      <TrainingNav />
       <TrainingResults />
-      <CirclesNav
-        activeExercise={activeExercise}
-        setActiveExercise={setActiveExercise}
-      />
+      <CirclesNav />
     </Grid>
   )
 }

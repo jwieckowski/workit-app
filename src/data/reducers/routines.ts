@@ -10,7 +10,8 @@ const initialState: RoutinesState = {
     item: null,
     data: [],
     error: null,
-    open: false
+    open: false,
+    startTrainingOpen: false
 }
 
 const routines: Reducer<RoutinesState> = (state = initialState, action: AnyAction) => {
@@ -163,6 +164,16 @@ const routines: Reducer<RoutinesState> = (state = initialState, action: AnyActio
                 open: false,
                 item: null,
                 updating: false,
+            }
+        case actions.OPEN_TRAINING_DIALOG:
+            return {
+                ...state,
+                startTrainingOpen: true,
+            }
+        case actions.CLOSE_TRAINING_DIALOG:
+            return {
+                ...state,
+                startTrainingOpen: false,
             }
         default:
             return {

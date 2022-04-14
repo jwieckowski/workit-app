@@ -1,6 +1,6 @@
-import * as React from 'react';
+import react, { useState, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -11,8 +11,21 @@ import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import HomeIcon from '@mui/icons-material/Home';
 
-export default function SimpleBottomNavigation() {
-  const [value, setValue] = React.useState(0);
+export default function BottomMenu() {
+  const [value, setValue] = useState<number>(0);
+  const location = useLocation();
+
+  const urls = [
+    '/workit',
+    '/workit/statistics',
+    '/workit/history',
+    '/workit/body',
+    '/workit/more'
+  ]
+
+  useEffect(() => {
+    setValue(urls.indexOf(location.pathname))
+  }, [location.pathname])
 
   return (
     <Box sx={{ width: '100%' }}>
