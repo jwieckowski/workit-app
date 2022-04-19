@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/workit/static/css/main.95ffb8b4.css",
+    "main.js": "/workit/static/js/main.6c5f2c5f.js",
+    "index.html": "/workit/index.html",
+    "main.95ffb8b4.css.map": "/workit/static/css/main.95ffb8b4.css.map",
+    "main.6c5f2c5f.js.map": "/workit/static/js/main.6c5f2c5f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95ffb8b4.css",
+    "static/js/main.6c5f2c5f.js"
+  ]
+}
