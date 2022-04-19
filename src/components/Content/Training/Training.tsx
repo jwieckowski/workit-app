@@ -5,8 +5,10 @@ import Grid from '@mui/material/Grid';
 import TrainingBar from './TrainingBar'
 import TrainingContent from './TrainingContent'
 import TrainingForm from './TrainingForm'
+// import TrainingDialog from './TrainingDialog'
 
 export default function Training() {
+
   return (
     <Grid
       container
@@ -17,6 +19,7 @@ export default function Training() {
       <TrainingBar />
       <TrainingContent />
       <TrainingForm />
+      {/* <TrainingDialog /> */}
     </Grid>
   )
 }

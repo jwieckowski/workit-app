@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -12,16 +12,27 @@ import { RootState } from '../../../../redux/reducer'
 import { finishTraining, postTraining } from '../../../../data/actions/training'
 import { setActiveRoutine } from '../../../../data/actions/routines'
 
+import useTimer from '../../../../common/hooks/useTimer'
+
 export default function TrainingBar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const routines = useSelector((state: RootState) => state.routines)
   const { item } = useSelector((state: RootState) => state.training)
 
+  const { minutes, toggle, reset } = useTimer()
+
+  console.log(minutes)
+
+  useEffect(() => {
+    toggle()
+  }, [])
+
   const handleFinish = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (item === null) return
 
+    reset()
     dispatch(finishTraining())
     dispatch(setActiveRoutine({ _id: null }))
     dispatch(postTraining({
@@ -48,7 +59,7 @@ export default function TrainingBar() {
       >
         <TimerIcon />
         <Typography>
-          {} min
+          {minutes + 1} min
         </Typography>
       </Grid>
       <Grid

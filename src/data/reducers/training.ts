@@ -4,10 +4,13 @@ import { TrainingState } from '../../common/types/training'
 
 const initialState: TrainingState = {
     active: false,
+    open: false,
+    url: '',
     exerciseID: null,
     time: 0,
     loading: false,
     posting: false,
+    editMode: false,
     data: [],
     item: null,
     error: null
@@ -45,7 +48,7 @@ const training: Reducer<TrainingState> = (state = initialState, action: AnyActio
             return {
                 ...state,
                 loading: false,
-                data: action.payload.data,
+                data: action.payload.data.reverse(),
                 error: null
             }
         case actions.FETCH_TRAINING_DATA_FAIL:
@@ -64,7 +67,7 @@ const training: Reducer<TrainingState> = (state = initialState, action: AnyActio
             return {
                 ...state,
                 posting: false,
-                data: state?.item ? [...state.data, state.item] : state.data,
+                data: state?.item ? [state.item, ...state.data] : state.data,
                 item: null,
                 error: null
             }
@@ -75,6 +78,23 @@ const training: Reducer<TrainingState> = (state = initialState, action: AnyActio
                 item: null,
                 data: state.data,
                 error: action.payload.error
+            }
+        case actions.OPEN_ACTIVE_TRAINING_DIALOG:
+            return {
+                ...state,
+                open: true,
+                url: action.payload.url
+            }
+        case actions.CLOSE_ACTIVE_TRAINING_DIALOG:
+            return {
+                ...state,
+                open: false,
+                url: ''
+            }
+        case actions.START_EDIT_MODE:
+            return {
+                ...state,
+                editMode: true
             }
         case actions.ADD_TRAINING_SERIES:
             return {
@@ -95,11 +115,50 @@ const training: Reducer<TrainingState> = (state = initialState, action: AnyActio
             }
         case actions.EDIT_TRAINING_SERIES:
             return {
-                ...state
+                ...state,
+                editMode: false,
+                item: state.item !== null ? {
+                    ...state.item,
+                    trainingSeries: state.item.trainingSeries.filter(s => s.exerciseID === action.payload.exerciseID).length > 0
+                        ? [...state.item.trainingSeries.map(s => {
+                            return {
+                                ...s,
+                                data: s.exerciseID === action.payload.exerciseID
+                                    ? s.data.length > action.payload.series - 1
+                                        ? [...s.data.map((serie, idx) => {
+                                            return idx === action.payload.series - 1
+                                                ? {
+                                                    weights: action.payload.weights,
+                                                    reps: action.payload.reps
+                                                }
+                                                : serie
+                                        })]
+                                        : s.data
+                                    : s.data
+                            }
+                        })]
+                        : state.item.trainingSeries
+                } : state.item
             }
         case actions.DELETE_TRAINING_SERIES:
             return {
-                ...state
+                ...state,
+                editMode: false,
+                item: state.item !== null ? {
+                    ...state.item,
+                    trainingSeries: state.item.trainingSeries.filter(s => s.exerciseID === action.payload.exerciseID).length > 0
+                        ? [...state.item.trainingSeries.map(s => {
+                            return {
+                                ...s,
+                                data: s.exerciseID === action.payload.exerciseID
+                                    ? s.data.length > action.payload.series - 1
+                                        ? [...s.data.filter((_, idx) => idx !== action.payload.series - 1)]
+                                        : s.data
+                                    : s.data
+                            }
+                        })]
+                        : state.item.trainingSeries
+                } : state.item
             }
         default:
             return {

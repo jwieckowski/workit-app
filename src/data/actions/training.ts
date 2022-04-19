@@ -14,6 +14,10 @@ import {
     PostTrainingData,
     PostTrainingSuccess,
     PostTrainingFail,
+    OpenActiveTrainingDialog,
+    RedirectData,
+    CloseActiveTrainingDialog,
+    StartEditMode,
     AddTrainingSeries,
     AddTrainingSeriesData,
     EditTrainingSeries,
@@ -33,7 +37,7 @@ export const finishTraining = (): FinishTraining => ({
     type:  actions.FINISH_TRAINING
 })
 
-export const setActiveExercises = (
+export const setActiveExercise = (
     payload: SetActiveExerciseData
 ) : SetActiveExercise => {
     return {
@@ -80,6 +84,21 @@ export const postTrainingFail = (
 ): PostTrainingFail => ({
     type: actions.POST_TRAINING_DATA_FAIL,
     payload
+})
+
+export const openActiveTrainingDialog = (
+    payload: RedirectData
+) : OpenActiveTrainingDialog => ({
+    type: actions.OPEN_ACTIVE_TRAINING_DIALOG,
+    payload
+})
+
+export const closeActiveTrainingDialog = () : CloseActiveTrainingDialog => ({
+    type: actions.CLOSE_ACTIVE_TRAINING_DIALOG
+})
+
+export const startEditMode = () : StartEditMode => ({
+    type: actions.START_EDIT_MODE
 })
 
 export const addTrainingSeries = (

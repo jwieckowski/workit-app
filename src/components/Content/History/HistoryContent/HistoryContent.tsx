@@ -2,6 +2,7 @@ import React from 'react'
 
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
 
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../redux/reducer'
@@ -26,16 +27,21 @@ export default function HistoryContent() {
       justifyContent='center'
     >
       <List style={{width: '60%'}}>
-        {data[active].trainingSeries.map((d, idx) => {
-          return (
-            <HistoryItem
-              key={idx}
-              idx={idx}
-              name={getExerciseName(idx)}
-              data={d.data}
-            />
-          )
-        })}
+        {
+          data.length !== 0 && data[active].trainingSeries.length !== 0
+          ? data[active].trainingSeries.map((d, idx) => {
+            return (
+              <HistoryItem
+                key={idx}
+                idx={idx}
+                name={getExerciseName(idx)}
+                data={d.data}
+              />
+            )
+          })
+          : <Typography variant='h5' align='center'>No data recorded</Typography>
+
+        }
       </List>
     </Grid>
   )

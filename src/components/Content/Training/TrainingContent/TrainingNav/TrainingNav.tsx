@@ -8,7 +8,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../../../redux/reducer'
-import { setActiveExercises } from '../../../../../data/actions/training'
+import { setActiveExercise } from '../../../../../data/actions/training'
 
 export default function TrainingNav() {
   const dispatch = useDispatch()
@@ -41,13 +41,13 @@ export default function TrainingNav() {
   const handleClickNext = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (item === null || item.exercises.length === 0) return
-    dispatch(setActiveExercises({ exerciseID: getNextExerciseID(1)}))
+    dispatch(setActiveExercise({ exerciseID: getNextExerciseID(1)}))
   }
 
   const handleClickPrev = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (item === null || item.exercises.length === 0) return
-    dispatch(setActiveExercises({ exerciseID: getNextExerciseID(-1)}))
+    dispatch(setActiveExercise({ exerciseID: getNextExerciseID(-1)}))
   }
 
   return (

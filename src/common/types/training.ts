@@ -24,10 +24,13 @@ export interface StartTrainingDataItem {
 
 export interface TrainingState {
     active: boolean,
+    open: boolean,
+    url: string,
     exerciseID: number | null,
     time: number,
     loading: boolean,
     posting: boolean,
+    editMode: boolean,
     data: TrainingDataItem[] | [],
     item: TrainingDataItem | null,
     error: string | null
@@ -52,6 +55,10 @@ export interface StartTrainingPayload {
 
 export interface PostTrainingData {
     item: TrainingDataItem
+}
+
+export interface RedirectData {
+    url: string
 }
 
 export interface SetActiveExerciseData {
@@ -117,7 +124,17 @@ export interface PostTrainingFail {
     type: typeof actions.POST_TRAINING_DATA_FAIL,
     payload: TrainingFailData
 }
+export interface OpenActiveTrainingDialog {
+    type: typeof actions.OPEN_ACTIVE_TRAINING_DIALOG,
+    payload: RedirectData
+}
+export interface CloseActiveTrainingDialog {
+    type: typeof actions.CLOSE_ACTIVE_TRAINING_DIALOG
+}
 
+export interface StartEditMode {
+    type: typeof actions.START_EDIT_MODE
+}
 export interface AddTrainingSeries {
     type: typeof actions.ADD_TRAINING_SERIES,
     payload: AddTrainingSeriesData

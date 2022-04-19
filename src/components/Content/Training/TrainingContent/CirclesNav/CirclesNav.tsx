@@ -6,7 +6,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../../redux/reducer'
-import { setActiveExercises } from '../../../../../data/actions/training'
+import { setActiveExercise } from '../../../../../data/actions/training'
 
 export default function CirclesNav() {
   const dispatch = useDispatch()
@@ -16,7 +16,7 @@ export default function CirclesNav() {
   const handleClickCircle = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.preventDefault()
     if (item === null || item.exercises.length === 0) return
-    dispatch(setActiveExercises({ exerciseID: id }))
+    dispatch(setActiveExercise({ exerciseID: id }))
   }
 
   return (

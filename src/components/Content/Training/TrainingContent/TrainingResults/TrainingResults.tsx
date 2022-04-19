@@ -49,9 +49,18 @@ export default function TrainingResults() {
 
     return allResults.map((r, idx) => {
       return (
-        <Typography key={idx}>
-          {r.date}: {formatRepsWeights(r.data)}
-        </Typography>
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <Typography key={idx} align='right'>
+              {r.date}:
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography key={`${idx}_${idx}`} >
+              {formatRepsWeights(r.data)}
+            </Typography>
+          </Grid>
+        </Grid>
       )
     })
   }

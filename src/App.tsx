@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Layout from './components/Content/Layout'
 import Dashboard from './components/Content/Dashboard'
@@ -22,6 +22,7 @@ function App() {
           <Route path='/workit/history' element={<History />} />
           <Route path='/workit/statistics' element={<Statistics />} />
           <Route path='/workit/training' element={<Training />} />
+          <Route path="*" element={<Navigate to='/workit' replace />} />
         </Routes>
       </Layout>
     </Router>

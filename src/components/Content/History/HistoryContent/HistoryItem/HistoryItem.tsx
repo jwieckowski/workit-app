@@ -17,18 +17,18 @@ export default function HistoryContent({idx, name, data}: PropTypes) {
 
   return (
     <ListItem style={{ borderBottom: '1px solid black'}} key={idx}>
-        <ListItemText
+      <ListItemText
         primary={
-            <Typography>
-                {name}
-            </Typography>
+          <Typography>
+              {name}
+          </Typography>
         }
         secondary={
-            <Typography>
-                {formatRepsWeights(data)}
-            </Typography>
+          <Typography>
+              {formatRepsWeights(data)}
+          </Typography>
         }
-        />
+      />
     </ListItem>
   )
 }

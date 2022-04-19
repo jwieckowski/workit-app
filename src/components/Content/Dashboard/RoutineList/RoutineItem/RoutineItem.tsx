@@ -16,7 +16,6 @@ import { startTraining } from '../../../../../data/actions/training'
 import { ExerciseItem } from '../../../../../common/types/routines'
 
 import { getCurrentDate } from '../../../helpers'
-
 interface ItemProps {
   _id: number
   name: string,
