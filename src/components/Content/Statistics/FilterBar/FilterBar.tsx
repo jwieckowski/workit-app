@@ -1,4 +1,4 @@
-import * as React from 'react';
+import react from 'react';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -7,11 +7,30 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-export default function FilterBar() {
-  const [age, setAge] = React.useState('');
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../../../redux/reducer'
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+import {
+  setDate,
+  setPart,
+  setExercise,
+  setType
+} from '../../../../data/actions/statistics'
+
+export default function FilterBar() {
+  const dispatch = useDispatch()
+  const { data } = useSelector((state: RootState) => state.exercises)
+  const { date, part, exercise, type } = useSelector((state: RootState) => state.statistics)
+
+  const handleChange = (e: SelectChangeEvent) => {
+    const selects = ['date-select', 'part-select', 'exercise-select', 'type-select']
+    const sets = [
+      setDate,
+      setPart,
+      setExercise,
+      setType
+    ]
+    dispatch(sets[selects.indexOf(e.target.name)]({ id: e.target.value }))
   };
 
   return (
@@ -34,65 +53,74 @@ export default function FilterBar() {
       >
         <Grid container item xs={5} md={2} lg={2} justifyContent='end'>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="date-label">Date</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
+              labelId="date-label"
+              name="date-select"
+              value={date}
+              label="Date"
               onChange={handleChange}
               >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={'0'}>One week</MenuItem>
+              <MenuItem value={'1'}>One month</MenuItem>
+              <MenuItem value={'2'}>Six months</MenuItem>
+              <MenuItem value={'3'}>One year</MenuItem>
+              <MenuItem value={'4'}>All time</MenuItem>
             </Select>
           </FormControl>
         </Grid>
         <Grid container item xs={5} md={2} lg={2} justifyContent='end'>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="part-label">Part</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
+              labelId="part-label"
+              name="part-select"
+              value={part}
+              label="Part"
               onChange={handleChange}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {
+                Object.keys(data).map((key, idx) => {
+                  return (
+                    <MenuItem value={idx.toString()}>{key}</MenuItem>
+                  )
+                })
+              }
             </Select>
           </FormControl>
         </Grid>
         <Grid container item xs={5} md={2} lg={2} justifyContent='end'>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="exercise-label">Exercise</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
+              labelId="exercise-label"
+              name="exercise-select"
+              value={exercise}
+              label="Exercise"
               onChange={handleChange}
-              >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+            >
+              {
+                Object.values(data[Object.keys(data)[parseInt(part)]]).map((val, idx) => {
+                  return (
+                    <MenuItem value={idx.toString()}>{val.name}</MenuItem>
+                  )
+                })
+              }
             </Select>
           </FormControl>
         </Grid>
         <Grid container item xs={5} md={2} lg={2} justifyContent='end'>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="type-label">Type</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
+              labelId="type-label"
+              name="type-select"
+              value={type}
+              label="Type"
               onChange={handleChange}
               >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={'0'}>Weights</MenuItem>
+              <MenuItem value={'1'}>Reps</MenuItem>
             </Select>
           </FormControl>
         </Grid>

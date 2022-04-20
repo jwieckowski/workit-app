@@ -2,6 +2,9 @@ import React from 'react';
 
 import Grid from '@mui/material/Grid';
 
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../../redux/reducer'
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -62,7 +65,13 @@ const data = {
     },
   ],
 };
+
+
 export default function StatisticsChart() {
+  const { date, part, exercise, type } = useSelector((state: RootState) => state.statistics)
+
+  console.log(date, part, exercise, type)
+
   return (
     <Grid
       container
