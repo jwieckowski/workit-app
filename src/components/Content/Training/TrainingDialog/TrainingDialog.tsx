@@ -19,13 +19,13 @@ export default function TrainingDialog() {
   const dispatch = useDispatch()
   const { item, open, url } = useSelector((state: RootState) => state.training)
 
-  const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (item === null) return
 
     dispatch(finishTraining())
     dispatch(setActiveRoutine({ _id: null }))
-    dispatch(postTraining({
+    await dispatch(postTraining({
         item: item
     }))
     dispatch(closeActiveTrainingDialog())

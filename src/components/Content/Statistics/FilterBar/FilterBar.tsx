@@ -80,14 +80,14 @@ export default function FilterBar() {
               onChange={handleChange}
             >
               {
-                Object.keys(data).length !== 1 &&
-                Object.keys(data).map((key, idx) => {
-                  return (
-                    <MenuItem value={idx.toString()}>{key}</MenuItem>
-                    )
+                Object.keys(data).length !== 1
+                  ? [...Object.keys(data), 'All parts'].map((key, idx) => {
+                      return (
+                        <MenuItem value={idx.toString()}>{key}</MenuItem>
+                      )
                   })
-                }
-                <MenuItem value={Object.keys(data).length !== 1 ? Object.keys(data).length.toString() : 0}>All parts</MenuItem>
+                  : <MenuItem value='0'>All parts</MenuItem>
+              }
             </Select>
           </FormControl>
         </Grid>
@@ -102,14 +102,13 @@ export default function FilterBar() {
               onChange={handleChange}
             >
               { parseInt(part) !== Object.keys(data).length
-                  ? Object.values(data[Object.keys(data)[parseInt(part)]]).map((val, idx) => {
+                  ? [...Object.values(data[Object.keys(data)[parseInt(part)]]), {name: 'All exercises'}].map((val, idx) => {
                     return (
                       <MenuItem value={idx.toString()}>{val.name}</MenuItem>
                       )
                     })
                   : <MenuItem value={0}>All exercises</MenuItem>
-                }
-                <MenuItem value={Object.values(data[Object.keys(data)[parseInt(part)]]).length}>All exercises</MenuItem>
+              }
             </Select>
           </FormControl>
         </Grid>

@@ -22,14 +22,14 @@ export default function ExercisesList() {
   const { item } = useSelector((state: RootState) => state.routines)
   const favorites = useSelector((state: RootState) => state.favorites)
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (item === null) return
 
-    dispatch(closeRoutineExercises())
-    dispatch(postRoutineExercises({
+    await dispatch(postRoutineExercises({
       item: item
     }))
+    dispatch(closeRoutineExercises())
     navigate('/workit', { replace: true })
   }
 
@@ -101,7 +101,7 @@ export default function ExercisesList() {
         flexDirection='column'
         justifyContent={loading || error ? 'center' : 'start'}
         alignItems='center'
-        style= {{ padding: '10px', height: '80%'}}
+        style= {{ padding: '10px', height: '75%'}}
       >
         {content}
       </Grid>

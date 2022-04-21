@@ -22,8 +22,6 @@ export default function TrainingBar() {
 
   const { minutes, toggle, reset } = useTimer()
 
-  console.log(minutes)
-
   useEffect(() => {
     toggle()
   }, [])

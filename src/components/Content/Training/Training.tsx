@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import TrainingBar from './TrainingBar'
 import TrainingContent from './TrainingContent'
 import TrainingForm from './TrainingForm'
-// import TrainingDialog from './TrainingDialog'
+import TrainingDialog from './TrainingDialog'
 
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/reducer'
@@ -29,7 +29,7 @@ export default function Training() {
       <TrainingBar />
       <TrainingContent />
       <TrainingForm />
-      {/* <TrainingDialog /> */}
+      <TrainingDialog />
     </Grid>
   )
 }

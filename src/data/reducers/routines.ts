@@ -139,7 +139,7 @@ const routines: Reducer<RoutinesState> = (state = initialState, action: AnyActio
             return {
                 ...state,
                 posting: false,
-                data: state?.item ? [...state.data.map(d => d._id === state?.item?._id ? state.item : d)] : state.data,
+                data: state?.item !== null ? [...state.data.map(d => d._id === state?.item?._id ? state.item : d)] : state.data,
                 item: null,
                 error: null
             }

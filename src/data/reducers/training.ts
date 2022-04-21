@@ -89,7 +89,8 @@ const training: Reducer<TrainingState> = (state = initialState, action: AnyActio
             return {
                 ...state,
                 open: false,
-                url: ''
+                url: '',
+                item: null
             }
         case actions.START_EDIT_MODE:
             return {

@@ -82,76 +82,125 @@ export default function TrainingForm() {
       container
       justifyContent='center'
       alignItems='center'
-      gap="20px"
+      // gap="20px"
       style={{
         height: "20%"
       }}
     >
       {
         editMode &&
+        <Grid
+          item
+          container
+          xs={2}
+          justifyContent='center'
+        >
         <TextField
-        id="series"
-        label="Series"
-        variant="outlined"
-        value={series}
-        onChange={handleChange}
-        />
+          id="series"
+          label="Series"
+          variant="outlined"
+          value={series}
+          onChange={handleChange}
+          />
+        </Grid>
       }
-      <TextField
-        id="reps"
-        label="Reps"
-        variant="outlined"
-        value={reps}
-        onChange={handleChange}
-      />
-      <TextField
-        id="weight"
-        label="Weight"
-        variant="outlined"
-        value={weights}
-        onChange={handleChange}
-      />
+      <Grid
+        item
+        container
+        xs={2}
+        justifyContent='center'
+      >
+        <TextField
+          id="weight"
+          label="Weight"
+          variant="outlined"
+          value={weights}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid
+        item
+        container
+        xs={2}
+        justifyContent='center'
+      >
+        <TextField
+          id="reps"
+          label="Reps"
+          variant="outlined"
+          value={reps}
+          onChange={handleChange}
+        />
+      </Grid>
       {
         !editMode
         ? <>
-            <IconButton
-            onClick={handleSubmit}
-            style={{
-              backgroundColor: 'black',
-              color: 'white'
-            }}
-          >
-            <CheckIcon />
-          </IconButton>
-          <IconButton
-            onClick={handleEditMode}
-            style={{
-              backgroundColor: 'black',
-              color: 'white'
-            }}
+            <Grid
+              item
+              container
+              md={1} xs={2}
+              justifyContent='center'
             >
-            <MoreIcon />
-          </IconButton>
+              <IconButton
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: 'black',
+                  color: 'white'
+                }}
+              >
+                <CheckIcon />
+              </IconButton>
+            </Grid>
+            <Grid
+              item
+              container
+              md={1} xs={2}
+              justifyContent='center'
+            >
+              <IconButton
+                onClick={handleEditMode}
+                style={{
+                  backgroundColor: 'black',
+                  color: 'white'
+                }}
+                >
+                <MoreIcon />
+              </IconButton>
+            </Grid>
         </>
         : <>
-          <IconButton
-            onClick={handleEditSeries}
-            style={{
-              backgroundColor: 'black',
-              color: 'white'
-            }}
+            <Grid
+              item
+              container
+              md={1} xs={2}
+              justifyContent='center'
             >
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            onClick={handleDeleteSeries}
-            style={{
-              backgroundColor: 'black',
-              color: 'white'
-            }}
+              <IconButton
+                onClick={handleEditSeries}
+                style={{
+                  backgroundColor: 'black',
+                  color: 'white'
+                }}
+                >
+                <EditIcon />
+              </IconButton>
+            </Grid>
+            <Grid
+              item
+              container
+              md={1} xs={2}
+              justifyContent='center'
             >
-            <DeleteIcon />
-          </IconButton>
+              <IconButton
+                onClick={handleDeleteSeries}
+                style={{
+                  backgroundColor: 'black',
+                  color: 'white'
+                }}
+                >
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
         </>
       }
     </Grid>
