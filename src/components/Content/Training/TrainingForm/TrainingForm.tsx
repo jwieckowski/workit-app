@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from 'react'
+import React, { useState, Dispatch, SetStateAction, useEffect } from 'react'
 
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -24,7 +24,27 @@ export default function TrainingForm() {
   const [weights, setWeights] = useState<string>('')
   const [series, setSeries] = useState<string>('')
 
-  const { exerciseID, editMode } = useSelector((state: RootState) => state.training)
+  const { data, item, exerciseID, editMode } = useSelector((state: RootState) => state.training)
+  const routines = useSelector((state: RootState) => state.routines)
+
+  const getLastTrainingData = () => {
+    const lastTraining = data.filter(d => d.routineID === routines.item?._id)[0]
+    return lastTraining.trainingSeries.filter(s => s.exerciseID === exerciseID)[0].data[0]
+  }
+
+  useEffect(() => {
+    const last = getLastTrainingData()
+    const current = item?.trainingSeries.filter(s => s.exerciseID === exerciseID)
+
+    if (current === undefined || current?.length === 0) {
+      setReps(last.reps.toString())
+      setWeights(last.weights.toString())
+    } else {
+      const stats = current[0].data[current[0].data.length - 1]
+      setReps(stats.reps.toString())
+      setWeights(stats.weights.toString())
+    }
+  }, [exerciseID])
 
   const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
@@ -82,7 +102,6 @@ export default function TrainingForm() {
       container
       justifyContent='center'
       alignItems='center'
-      // gap="20px"
       style={{
         height: "20%"
       }}
