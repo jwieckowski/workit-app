@@ -49,7 +49,7 @@ export default function HistoryBar() {
         justifyContent='center'
       >
         <Typography variant='h6' align='center'>
-          {routines.data.filter(d => d._id === data[active]?.routineID)[0].name}
+          {routines.data.filter(d => d._id === data[active]?.routineID)[0]?.name}
         </Typography>
         <Typography variant='body2' align='center'>
            {data[active]?.date}

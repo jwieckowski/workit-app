@@ -57,7 +57,7 @@ export default function FilterBar() {
             <Select
               labelId="date-label"
               name="date-select"
-              value={date}
+              value={undefined}
               label="Date"
               onChange={handleChange}
               >
@@ -75,17 +75,19 @@ export default function FilterBar() {
             <Select
               labelId="part-label"
               name="part-select"
-              value={part}
+              value={undefined}
               label="Part"
               onChange={handleChange}
             >
               {
+                Object.keys(data).length !== 1 &&
                 Object.keys(data).map((key, idx) => {
                   return (
                     <MenuItem value={idx.toString()}>{key}</MenuItem>
-                  )
-                })
-              }
+                    )
+                  })
+                }
+                <MenuItem value={Object.keys(data).length !== 1 ? Object.keys(data).length.toString() : 0}>All parts</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -95,17 +97,19 @@ export default function FilterBar() {
             <Select
               labelId="exercise-label"
               name="exercise-select"
-              value={exercise}
+              value={undefined}
               label="Exercise"
               onChange={handleChange}
             >
-              {
-                Object.values(data[Object.keys(data)[parseInt(part)]]).map((val, idx) => {
-                  return (
-                    <MenuItem value={idx.toString()}>{val.name}</MenuItem>
-                  )
-                })
-              }
+              { parseInt(part) !== Object.keys(data).length
+                  ? Object.values(data[Object.keys(data)[parseInt(part)]]).map((val, idx) => {
+                    return (
+                      <MenuItem value={idx.toString()}>{val.name}</MenuItem>
+                      )
+                    })
+                  : <MenuItem value={0}>All exercises</MenuItem>
+                }
+                <MenuItem value={Object.values(data[Object.keys(data)[parseInt(part)]]).length}>All exercises</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -115,7 +119,7 @@ export default function FilterBar() {
             <Select
               labelId="type-label"
               name="type-select"
-              value={type}
+              value={undefined}
               label="Type"
               onChange={handleChange}
               >

@@ -11,19 +11,21 @@ import { fetchTrainings, openActiveTrainingDialog } from '../../../data/actions/
 import { fetchExercises } from '../../../data/actions/exercises'
 import { fetchFavorites } from '../../../data/actions/favorites'
 
+import useRedirect from '../../../common/hooks/useRedirect'
+
 interface LayoutChildren {
     children: ReactChildren | ReactChild
 }
 
 export default function Layout({children}: LayoutChildren) {
-  const location = useLocation()
+  // const location = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [currentPath, setCurrentPath] = useState<string>('')
   const state = useSelector((state: RootState) => state)
+  const { location } = useRedirect()
 
   console.log(state.training)
-
 
   useEffect(() => {
     dispatch(fetchTrainings())
@@ -47,6 +49,7 @@ export default function Layout({children}: LayoutChildren) {
     }
 
     setCurrentPath(location.pathname)
+    console.log(location.pathname)
   }, [location.pathname])
 
   return (

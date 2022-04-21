@@ -8,8 +8,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reducer'
-import { fetchExercises, closeRoutineExercises } from '../../../data/actions/exercises'
-import { fetchFavorites } from '../../../data/actions/favorites'
+import { closeRoutineExercises } from '../../../data/actions/exercises'
 import { postRoutineExercises } from '../../../data/actions/routines'
 
 import ExercisesItem from './ExercisesItem';
@@ -33,11 +32,6 @@ export default function ExercisesList() {
     }))
     navigate('/workit', { replace: true })
   }
-
-  // useEffect(() => {
-  //   dispatch(fetchExercises())
-  //   dispatch(fetchFavorites())
-  // }, [])
 
   let content = <Spinner />
 
@@ -102,7 +96,15 @@ export default function ExercisesList() {
           }
         </Grid>
       </Grid>
-      {content}
+      <Grid
+        container
+        flexDirection='column'
+        justifyContent={loading || error ? 'center' : 'start'}
+        alignItems='center'
+        style= {{ padding: '10px', height: '80%'}}
+      >
+        {content}
+      </Grid>
       {
         openForRoutine &&
         <Grid style={{ paddingTop: '10px' }}>

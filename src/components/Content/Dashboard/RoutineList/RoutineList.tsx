@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchRoutines, openRoutineDialog } from '../../../../data/actions/routines'
 import { RootState } from '../../../../redux/reducer'
 
+import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
@@ -77,8 +78,13 @@ export default function RoutineList() {
   }
 
   return (
-    <>
+    <Grid
+      container
+      justifyContent='center'
+      alignItems={loading || error ? 'center' : 'start'}
+      style={{height: '90%'}}
+    >
       {content}
-    </>
+    </Grid>
   );
 }

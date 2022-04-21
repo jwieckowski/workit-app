@@ -18,7 +18,7 @@ export default function HistoryContent() {
     const filtered = data[active].trainingSeries.filter((d, i) => i === idx)
     if (filtered.length === 0) return ''
     const exerciseID = filtered[0].exerciseID
-    return Object.values(exercises.data).flat().filter(d => d._id === exerciseID)[0].name
+    return Object.values(exercises.data).flat().filter(d => d._id === exerciseID)[0]?.name
   }
 
   return (
