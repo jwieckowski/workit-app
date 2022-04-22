@@ -7,7 +7,11 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 
+import { useTranslation } from 'react-i18next'
+
 export default function Exercise() {
+  const { t } = useTranslation()
+
   return (
     <Grid
       container
@@ -20,7 +24,7 @@ export default function Exercise() {
       }}
     >
       <Link
-        to='/workit/exercises'
+        to='/workit-app/exercises'
         style={{
           display: 'flex',
           textDecoration: 'none',
@@ -30,7 +34,7 @@ export default function Exercise() {
         <IconButton aria-label='exercises' size='large'>
           <DirectionsBikeIcon />
         </IconButton>
-        <Typography variant='h4' style={{paddingLeft: '20px'}}>Exercises</Typography>
+        <Typography variant='h4' style={{paddingLeft: '20px'}}>{t('common:exercises')}</Typography>
       </Link>
     </Grid>
   )

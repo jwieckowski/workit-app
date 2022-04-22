@@ -12,12 +12,15 @@ import { RoutineItem } from '../../../../../common/types/routines'
 import { useDispatch, useSelector } from "react-redux"
 import { postRoutine, updateRoutine, closeRoutineDialog } from '../../../../../data/actions/routines'
 
+import { useTranslation } from 'react-i18next'
+
 const getArrayMaxID = (data: RoutineItem[]) => {
   if (data.length === 0) return 0
   return data.sort((a, b) => b._id - a._id)[0]._id
 }
 
 export default function RoutineDialog() {
+  const { t } = useTranslation()
   const [name, setName] = useState<string>('')
   const { open, data, updating, item } = useSelector((state: RootState) => state.routines)
   const dispatch = useDispatch()
@@ -60,7 +63,7 @@ export default function RoutineDialog() {
       open={open}
       onBackdropClick={() => dispatch(closeRoutineDialog())}
     >
-      <DialogTitle style={{textAlign: 'center'}}>Create routine</DialogTitle>
+      <DialogTitle style={{textAlign: 'center'}}>{t('dashboard:create')}</DialogTitle>
       <Grid
         container
         direction='column'
@@ -73,7 +76,7 @@ export default function RoutineDialog() {
       >
         <TextField
           id="name"
-          label="Name"
+          label={t('common:name')}
           variant="outlined"
           value={name}
           onChange={handleChange}
@@ -82,7 +85,7 @@ export default function RoutineDialog() {
           variant="contained"
           onClick={handleClick}
         >
-          Submit
+          {t('common:submit')}
         </Button>
       </Grid>
     </Dialog>

@@ -1,0 +1,15 @@
+{
+    "params": "Parametry treningu",
+    "date": "Data",
+    "part": "Partia",
+    "exercise": "Ćwiczenie",
+    "type": "Typ",
+    "all-parts": "Wszystkie partie",
+    "all-exercises": "Wszystkie ćwiczenia",
+    "training-data": "Dane treningowe",
+    "week": "Tydzień",
+    "month": "Miesiąc",
+    "six-months": "Pół roku",
+    "year": "Rok",
+    "all-time": "Od początku"
+}

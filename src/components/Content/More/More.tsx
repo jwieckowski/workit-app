@@ -14,7 +14,11 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 
+import { useTranslation } from 'react-i18next'
+
 export default function More() {
+  const { t } = useTranslation()
+
   return (
     <Grid
       container
@@ -24,7 +28,7 @@ export default function More() {
       gap={'30px'}
     >
       <Typography variant='h5' style={{paddingTop: '30px'}}>
-        Settings
+        {t('more:settings')}
       </Typography>
       <List style={{width: '50%'}}>
         <ListItem style={{borderBottom: '1px solid black'}}>
@@ -34,7 +38,7 @@ export default function More() {
             </ListItemIcon>
             <ListItemText primary={
               <Typography variant='h6'>
-                Records
+                {t('more:records')}
               </Typography>
               } />
           </ListItemButton>
@@ -46,7 +50,7 @@ export default function More() {
             </ListItemIcon>
             <ListItemText primary={
               <Typography variant='h6'>
-                Favorites
+                {t('more:favorites')}
               </Typography>
               } />
           </ListItemButton>
@@ -58,7 +62,7 @@ export default function More() {
             </ListItemIcon>
             <ListItemText primary={
               <Typography variant='h6'>
-                Contact
+                {t('more:contact')}
               </Typography>
               }
             />
@@ -71,7 +75,7 @@ export default function More() {
             </ListItemIcon>
             <ListItemText primary={
               <Typography variant='h6'>
-                About
+                {t('more:about')}
               </Typography>
               } />
           </ListItemButton>
@@ -83,7 +87,7 @@ export default function More() {
             </ListItemIcon>
             <ListItemText primary={
               <Typography variant='h6'>
-                Application
+                {t('more:application')}
               </Typography>
               }
             />

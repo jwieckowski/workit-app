@@ -12,10 +12,11 @@ import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reducer'
 
-// TODO sort by data
+import { useTranslation } from 'react-i18next'
 
 export default function BodyTable() {
   const { data } = useSelector((state: RootState) => state.body)
+  const { t } = useTranslation()
 
   return (
    <TableContainer component={Paper} elevation={4} style={{width: '80%', padding: '0 10%', maxHeight: '50%', minHeight: '50%'}}>
@@ -29,12 +30,12 @@ export default function BodyTable() {
           <TableRow>
             <TableCell>
               <Typography variant='h6'>
-                Date
+                {t('body:date')}
               </Typography>
             </TableCell>
             <TableCell align="right">
               <Typography variant='h6'>
-                Weight
+                {t('body:weight')}
               </Typography>
             </TableCell>
           </TableRow>

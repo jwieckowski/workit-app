@@ -29,7 +29,7 @@ export default function Header() {
             justifyContent='end'
             alignItems='center'
           >
-            <Link to='/workit'>
+            <Link to='/workit-app'>
               <IconButton >
                 <FitnessCenterIcon />
               </IconButton>

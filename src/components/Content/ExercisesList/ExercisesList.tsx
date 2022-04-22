@@ -15,7 +15,10 @@ import ExercisesItem from './ExercisesItem';
 import Spinner from '../../UI/Spinner'
 import Page404 from '../../UI/Page404'
 
+import { useTranslation } from 'react-i18next'
+
 export default function ExercisesList() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { loading, data, error, openForRoutine } = useSelector((state: RootState) => state.exercises)
@@ -30,7 +33,7 @@ export default function ExercisesList() {
       item: item
     }))
     dispatch(closeRoutineExercises())
-    navigate('/workit', { replace: true })
+    navigate('/workit-app', { replace: true })
   }
 
   let content = <Spinner />
@@ -86,7 +89,7 @@ export default function ExercisesList() {
           style= {{ padding: '5px'}}
         >
           <Typography variant='h4'>
-            Exercises list
+            {t('common:exercises-list')}
           </Typography>
           {
             openForRoutine &&
@@ -109,7 +112,7 @@ export default function ExercisesList() {
         openForRoutine &&
         <Grid style={{ paddingTop: '10px' }}>
           <Button variant='contained' onClick={handleClick}>
-            SUBMIT
+            {t('common:submit')}
           </Button>
         </Grid>
       }

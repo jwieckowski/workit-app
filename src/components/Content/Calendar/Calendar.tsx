@@ -12,19 +12,21 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from '../../../redux/reducer'
 import { closeCalendar } from '../../../data/actions/calendar'
 
+import { useTranslation } from 'react-i18next'
 
 export default function Calendar() {
   const [value, setValue] = useState<Date | null>(new Date());
   const dispatch = useDispatch()
 
   const { open } = useSelector((state: RootState) => state.calendar)
+  const { t } = useTranslation()
 
   return (
     <Dialog
       open={open}
       onBackdropClick={() => dispatch(closeCalendar())}
     >
-      <DialogTitle style={{textAlign: 'center'}}>Calendar</DialogTitle>
+      <DialogTitle style={{textAlign: 'center'}}>{t('calendar:calendar')}</DialogTitle>
 
        <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker

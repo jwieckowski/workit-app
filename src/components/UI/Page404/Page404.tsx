@@ -5,7 +5,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
+import { useTranslation } from 'react-i18next'
+
 export default function Page404() {
+  const { t } = useTranslation()
+
   return (
     <Grid
       container
@@ -18,14 +22,14 @@ export default function Page404() {
       }}
     >
       <Typography component='h2' style={{fontSize: '2rem'}}>
-        Something went wrong ...
+        {t('common-error')}
       </Typography>
       <Button
         variant='contained'
         color='primary'
         endIcon={<RefreshIcon />}
       >
-        Refresh
+        {t('common:refresh')}
       </Button>
     </Grid>
   )

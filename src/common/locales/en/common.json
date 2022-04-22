@@ -1,0 +1,14 @@
+{
+    "submit": "Submit",
+    "name": "Name",
+    "exercises": "Exercises",
+    "exercises-list": "Exercises list",
+    "close": "Close",
+    "no-data": "No data recorded",
+    "loading": "Loading",
+    "error": "Something went wrong ...",
+    "refresh": "Refresh",
+    "reps": "Reps",
+    "weights": "Weights",
+    "series": "Series"
+}

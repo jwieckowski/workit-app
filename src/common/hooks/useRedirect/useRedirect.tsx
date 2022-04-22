@@ -17,7 +17,7 @@ export default function useRedirect() {
 
   function checkRoutineExercises () {
     if (item === null) return
-    if (currentPath === '/workit/exercises') {
+    if (currentPath === '/workit-app/exercises') {
       dispatch(setActiveRoutine({ _id: null }))
     }
   }
@@ -25,8 +25,8 @@ export default function useRedirect() {
   function checkActiveTraining () {
     if (!active) return
 
-    if (currentPath === '/workit/training') {
-      navigate('/workit/training', { replace: true })
+    if (currentPath === '/workit-app/training') {
+      navigate('/workit-app/training', { replace: true })
       dispatch(openActiveTrainingDialog({
         url: location.pathname
       }))

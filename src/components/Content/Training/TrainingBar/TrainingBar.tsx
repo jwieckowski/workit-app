@@ -14,7 +14,10 @@ import { setActiveRoutine } from '../../../../data/actions/routines'
 
 import useTimer from '../../../../common/hooks/useTimer'
 
+import { useTranslation } from 'react-i18next'
+
 export default function TrainingBar() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const routines = useSelector((state: RootState) => state.routines)
@@ -36,7 +39,7 @@ export default function TrainingBar() {
     dispatch(postTraining({
       item: item
     }))
-    navigate('/workit', { replace: true })
+    navigate('/workit-app', { replace: true })
   }
 
   return (
@@ -72,7 +75,7 @@ export default function TrainingBar() {
           {routines.item?.name}
         </Typography>
         <Typography variant='body2'>
-          Last training:
+          {t('dashboard:last')}
         </Typography>
       </Grid>
       <Grid
@@ -85,7 +88,7 @@ export default function TrainingBar() {
         <IconButton onClick={handleFinish}>
           <StopCircle />
         </IconButton>
-        <Typography>Finish training</Typography>
+        <Typography>{t('training:finish')}</Typography>
       </Grid>
     </Grid>
   )

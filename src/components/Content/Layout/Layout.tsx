@@ -3,8 +3,7 @@ import React, { ReactChildren, ReactChild, useEffect } from 'react';
 import { Grid } from '@material-ui/core'
 import NavigationBar from '../../Navigation/NavigationBar'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '../../../redux/reducer'
+import { useDispatch } from 'react-redux'
 import { fetchTrainings } from '../../../data/actions/training'
 import { fetchExercises } from '../../../data/actions/exercises'
 import { fetchFavorites } from '../../../data/actions/favorites'
@@ -17,7 +16,6 @@ interface LayoutChildren {
 
 export default function Layout({children}: LayoutChildren) {
   const dispatch = useDispatch()
-  // const state = useSelector((state: RootState) => state)
   useRedirect()
 
   useEffect(() => {

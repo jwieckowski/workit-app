@@ -17,8 +17,10 @@ import {
   deleteTrainingSeries
 } from '../../../../data/actions/training'
 
+import { useTranslation } from 'react-i18next'
 
 export default function TrainingForm() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const [reps, setReps] = useState<string>('')
   const [weights, setWeights] = useState<string>('')
@@ -116,7 +118,7 @@ export default function TrainingForm() {
         >
         <TextField
           id="series"
-          label="Series"
+          label={t('common:series')}
           variant="outlined"
           value={series}
           onChange={handleChange}
@@ -131,7 +133,7 @@ export default function TrainingForm() {
       >
         <TextField
           id="weight"
-          label="Weight"
+          label={t('common:weights')}
           variant="outlined"
           value={weights}
           onChange={handleChange}
@@ -145,7 +147,7 @@ export default function TrainingForm() {
       >
         <TextField
           id="reps"
-          label="Reps"
+          label={t('common:reps')}
           variant="outlined"
           value={reps}
           onChange={handleChange}

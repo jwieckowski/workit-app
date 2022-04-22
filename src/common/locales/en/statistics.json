@@ -1,0 +1,15 @@
+{
+    "params": "Training parameters",
+    "date": "Date",
+    "part": "Part",
+    "exercise": "Exercise",
+    "type": "Type",
+    "all-parts": "All parts",
+    "all-exercises": "All exercises",
+    "training-data": "Training data",
+    "week": "One week",
+    "month": "One month",
+    "six-months": "Six months",
+    "year": "One year",
+    "all-time": "All time"
+}

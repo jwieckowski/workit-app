@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../../redux/reducer'
 import { closeTrainingDialog } from '../../../../../data/actions/routines'
 
+import { useTranslation } from 'react-i18next'
+
 export default function ExerciseStartDialog() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { startTrainingOpen } = useSelector((state: RootState) => state.routines)
 
@@ -25,7 +28,7 @@ export default function ExerciseStartDialog() {
       open={startTrainingOpen}
       onBackdropClick={() => dispatch(closeTrainingDialog())}
     >
-      <DialogTitle style={{textAlign: 'center'}}>Starting a routine</DialogTitle>
+      <DialogTitle style={{textAlign: 'center'}}>{t('training:start-training')}</DialogTitle>
       <Grid
         container
         direction='column'
@@ -37,13 +40,13 @@ export default function ExerciseStartDialog() {
         }}
       >
         <Typography>
-          To start training, you must add exercises to your routines
+          {t('training:start-info')}
         </Typography>
         <Button
           variant="contained"
           onClick={handleClick}
         >
-          Close
+          {t('common:close')}
         </Button>
       </Grid>
     </Dialog>

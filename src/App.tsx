@@ -10,19 +10,21 @@ import More from './components/Content/More'
 import Exercises from './components/Content/ExercisesList'
 import Training from './components/Content/Training'
 
+import './common/locales'
+
 function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path='/workit' element={<Dashboard />} />
-          <Route path='/workit/exercises' element={<Exercises />} />
-          <Route path='/workit/more' element={<More />} />
-          <Route path='/workit/body' element={<Body />} />
-          <Route path='/workit/history' element={<History />} />
-          <Route path='/workit/statistics' element={<Statistics />} />
-          <Route path='/workit/training' element={<Training />} />
-          <Route path="*" element={<Navigate to='/workit' replace />} />
+          <Route path='/workit-app' element={<Dashboard />} />
+          <Route path='/workit-app/exercises' element={<Exercises />} />
+          <Route path='/workit-app/more' element={<More />} />
+          <Route path='/workit-app/body' element={<Body />} />
+          <Route path='/workit-app/history' element={<History />} />
+          <Route path='/workit-app/statistics' element={<Statistics />} />
+          <Route path='/workit-app/training' element={<Training />} />
+          <Route path="*" element={<Navigate to='/workit-app' replace />} />
         </Routes>
       </Layout>
     </Router>

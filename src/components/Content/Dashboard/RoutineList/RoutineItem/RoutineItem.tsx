@@ -16,6 +16,9 @@ import { startTraining } from '../../../../../data/actions/training'
 import { ExerciseItem } from '../../../../../common/types/routines'
 
 import { getCurrentDate } from '../../../helpers'
+
+import { useTranslation } from 'react-i18next'
+
 interface ItemProps {
   _id: number
   name: string,
@@ -23,8 +26,9 @@ interface ItemProps {
 }
 
 export default function RoutineItem({_id, name, exercises}: ItemProps) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -42,14 +46,14 @@ export default function RoutineItem({_id, name, exercises}: ItemProps) {
       },
       exerciseID: exercises[0]._id
     }))
-    navigate('/workit/training')
+    navigate('/workit-app/training')
   }
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     dispatch(openRoutineExercises())
     dispatch(setActiveRoutine({ _id }))
-    navigate('/workit/exercises', { replace: true })
+    navigate('/workit-app/exercises', { replace: true })
   }
 
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -81,7 +85,7 @@ export default function RoutineItem({_id, name, exercises}: ItemProps) {
         }
         secondary={
           <Typography variant='body2'>
-            Last training:
+            {t('dashboard:last')}
           </Typography>
         }
       />

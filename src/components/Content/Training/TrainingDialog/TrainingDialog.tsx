@@ -14,7 +14,10 @@ import { RootState } from '../../../../redux/reducer'
 import { postTraining, finishTraining, closeActiveTrainingDialog } from '../../../../data/actions/training'
 import { setActiveRoutine } from '../../../../data/actions/routines'
 
+import { useTranslation } from 'react-i18next'
+
 export default function TrainingDialog() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { item, open, url } = useSelector((state: RootState) => state.training)
@@ -48,7 +51,7 @@ const handleDiscard = (e: React.MouseEvent<HTMLButtonElement>) => {
       open={open}
       onBackdropClick={() => dispatch(closeActiveTrainingDialog())}
     >
-      <DialogTitle style={{textAlign: 'center'}}>Leave training</DialogTitle>
+      <DialogTitle style={{textAlign: 'center'}}>{t('training:leave')}</DialogTitle>
       <Grid
         container
         direction='column'
@@ -60,19 +63,19 @@ const handleDiscard = (e: React.MouseEvent<HTMLButtonElement>) => {
         }}
       >
         <Typography>
-          Do you want to end training and save it or discard changes?
+          {t('training:leave-message')}
         </Typography>
         <Button
           variant="contained"
           onClick={handleSave}
         >
-          SAVE
+          {t('training:save')}
         </Button>
         <Button
           variant="contained"
           onClick={handleDiscard}
         >
-          DISCARD
+          {t('training:discard')}
         </Button>
       </Grid>
     </Dialog>

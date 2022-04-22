@@ -16,7 +16,7 @@ export default function Training() {
   const { active } = useSelector((state: RootState) => state.training)
 
   useEffect(() => {
-    if (!active) navigate('/workit', { replace: true })
+    if (!active) navigate('/workit-app', { replace: true })
   }, [])
 
   return (

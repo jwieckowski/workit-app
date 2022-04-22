@@ -1,0 +1,9 @@
+{
+    "start-training": "Start treningu",
+    "start-info": "Aby rozpocząć trening, dodaj ćwiczenia do planu treningowego",
+    "finish": "Zakończ trening",
+    "leave": "Koniec treningu",
+    "leave-message": "Chcesz skończyć trening i zapisać zmiany czy je odrzucić?",
+    "save": "Zapisz",
+    "discard": "Odrzuć"
+}

@@ -19,9 +19,13 @@ import ExerciseStartDialog  from './ExerciseStartDialog';
 import Spinner from '../../../UI/Spinner'
 import Page404 from '../../../UI/Page404'
 
+import { useTranslation } from 'react-i18next'
+
 export default function RoutineList() {
   const { loading, data, error } = useSelector((state: RootState) => state.routines)
   const dispatch = useDispatch()
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     dispatch(fetchRoutines())
@@ -47,7 +51,7 @@ export default function RoutineList() {
                 }}
               >
                 <Typography variant='h6'>
-                  Training routines
+                  {t('dashboard:title')}
                 </Typography>
                 <IconButton onClick={handleClick}>
                   <AddCircleIcon fontSize='large'/>

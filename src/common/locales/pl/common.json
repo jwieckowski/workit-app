@@ -1,0 +1,14 @@
+{
+    "submit": "Prześlij",
+    "name": "Nazwa",
+    "exercises": "Ćwiczenia",
+    "exercises-list": "Lista ćwiczeń",
+    "close": "Zamknij",
+    "no-data": "Brak zarejestrowanych danych",
+    "loading": "Ładowanie",
+    "error": "Coś poszło nie tak ...",
+    "refresh": "Odśwież",
+    "reps": "Powtórzenia",
+    "weights": "Ciężar",
+    "series": "Seria"
+}

@@ -4,7 +4,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import { useTranslation } from 'react-i18next'
+
 export default function Spinner() {
+  const { t } = useTranslation()
+
   return (
     <Grid
       container
@@ -17,7 +21,7 @@ export default function Spinner() {
       }}
     >
       <Typography component='h2' style={{fontSize: '2rem'}}>
-        Loading
+        {t('common:loading')}
       </Typography>
       <CircularProgress />
     </Grid>

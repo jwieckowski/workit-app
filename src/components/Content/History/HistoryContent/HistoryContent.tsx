@@ -9,7 +9,10 @@ import { RootState } from '../../../../redux/reducer'
 
 import HistoryItem from './HistoryItem'
 
+import { useTranslation } from 'react-i18next'
+
 export default function HistoryContent() {
+  const { t } = useTranslation()
   const { active } = useSelector((state: RootState) => state.history)
   const { data } = useSelector((state: RootState) => state.training)
   const exercises = useSelector((state: RootState) => state.exercises)
@@ -39,7 +42,7 @@ export default function HistoryContent() {
               />
             )
           })
-          : <Typography variant='h5' align='center'>No data recorded</Typography>
+          : <Typography variant='h5' align='center'>{t('common:no-data')}</Typography>
 
         }
       </List>

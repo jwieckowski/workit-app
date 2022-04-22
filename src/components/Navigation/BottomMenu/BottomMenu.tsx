@@ -11,16 +11,19 @@ import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import HomeIcon from '@mui/icons-material/Home';
 
+import { useTranslation } from 'react-i18next';
+
 export default function BottomMenu() {
+  const { t } = useTranslation()
   const [value, setValue] = useState<number>(0);
   const location = useLocation();
 
   const urls = [
-    '/workit',
-    '/workit/statistics',
-    '/workit/history',
-    '/workit/body',
-    '/workit/more'
+    '/workit-app',
+    '/workit-app/statistics',
+    '/workit-app/history',
+    '/workit-app/body',
+    '/workit-app/more'
   ]
 
   useEffect(() => {
@@ -37,34 +40,34 @@ export default function BottomMenu() {
         }}
       >
         <BottomNavigationAction
-          label="Training"
+          label={t('menu:training')}
           icon={<HomeIcon />}
           component={Link}
-          to='/workit'
+          to='/workit-app'
         />
         <BottomNavigationAction
-          label="Statistics"
+          label={t('menu:statistics')}
           icon={<QueryStatsIcon />}
           component={Link}
-          to='/workit/statistics'
+          to='/workit-app/statistics'
         />
         <BottomNavigationAction
-          label="History"
+          label={t('menu:history')}
           icon={<HistoryIcon />}
           component={Link}
-          to='/workit/history'
+          to='/workit-app/history'
         />
         <BottomNavigationAction
-          label="Body"
+          label={t('menu:body')}
           icon={<MonitorWeightIcon />}
           component={Link}
-          to='/workit/body'
+          to='/workit-app/body'
         />
         <BottomNavigationAction
-          label="More"
+          label={t('menu:more')}
           icon={<SummarizeIcon />}
           component={Link}
-          to='/workit/more'
+          to='/workit-app/more'
         />
 
       </BottomNavigation>

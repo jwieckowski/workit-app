@@ -20,6 +20,8 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
+import { useTranslation } from 'react-i18next'
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -31,6 +33,7 @@ ChartJS.register(
 );
 
 export default function StatisticsChart() {
+  const { t } = useTranslation()
   const [chartData, setChartData]  = useState<any>({ labels: [], datasets: []});
 
   const { date, part, exercise, type } = useSelector((state: RootState) => state.statistics)
@@ -42,7 +45,7 @@ export default function StatisticsChart() {
     labels: [],
     datasets: [
       {
-        label: 'Training data',
+        label: t('statistics:training-data'),
         data: [],
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
       }
@@ -57,7 +60,7 @@ export default function StatisticsChart() {
       labels: data.filter((d, idx) => idx < newData.length).map(d => d.date).reverse(),
       datasets: [
         {
-          label: 'Training data',
+          label: t('statistics:training-data'),
           data: newData.reverse(),
           backgroundColor: 'rgba(255, 99, 132, 0.6)',
         }
@@ -157,7 +160,7 @@ export default function StatisticsChart() {
       },
       title: {
         display: true,
-        text: 'Training data',
+        text: t('statistics:training-data'),
       },
     },
   };

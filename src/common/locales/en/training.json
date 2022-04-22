@@ -1,0 +1,9 @@
+{
+    "start-training": "Starting training",
+    "start-info": "To start training, you must add exercises to your routines",
+    "finish": "Finish training",
+    "leave": "Leave training",
+    "leave-message": "Do you want to end training and save it or discard changes?",
+    "save": "Save",
+    "discard": "Discard"
+}
