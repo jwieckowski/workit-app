@@ -30,8 +30,10 @@ export default function TrainingForm() {
   const routines = useSelector((state: RootState) => state.routines)
 
   const getLastTrainingData = () => {
-    const lastTraining = data.filter(d => d.routineID === routines.item?._id)[0]
-    return lastTraining.trainingSeries.filter(s => s.exerciseID === exerciseID)[0].data[0]
+    const lastTraining = data.filter(d => d.routineID === routines.item?._id && d.trainingSeries.length !== 0)[0]
+
+    if (lastTraining.trainingSeries.length === 0) return null
+    return lastTraining.trainingSeries.filter(s => s.exerciseID === exerciseID)[0]?.data[0]
   }
 
   useEffect(() => {
@@ -39,6 +41,11 @@ export default function TrainingForm() {
     const current = item?.trainingSeries.filter(s => s.exerciseID === exerciseID)
 
     if (current === undefined || current?.length === 0) {
+      if (!last) {
+        setReps('')
+        setWeights('')
+        return
+      }
       setReps(last.reps.toString())
       setWeights(last.weights.toString())
     } else {
